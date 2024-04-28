@@ -18,7 +18,9 @@ The Partitive plural is one of the main differences. Here the word _lasse_ turns
 
 Like Strack (2024) mentions saying _Eldar matir massa_ means **Elves eat bread**. Here you would be implying that all elves eat bread, but this is not the case, so although it is grammatically correct, it is better to say _Eldali matir massa_ which means **Some elves eat bread**. 
 
-The Dual form will not be analyzed in this text, but to give context it refers exactly two entities of something. An example is _hendu_ which means two eyes. This will not be analyzed since the grammatical rules vary a bit more than the other two plurals. 
+The Dual form will not be analyzed in this text, but to give context it refers to exactly two entities of something. An example is _hendu_ which means two eyes. This will not be analyzed since the grammatical rules vary a bit more than the other two plurals. 
+
+Another important thing to mention is that Quenya does not have indefinite articles and only has one article which is **i**. This does not change for number, or case.
 
 ### Plural rules
 To better understand how to form the two different types of plural, here the basic rules will be given for each. 
@@ -42,6 +44,24 @@ The model that will be used is a grammar which can create and validate the plura
 * `alda:` tree
 * `Elda:` Elf
 * `massa:` bread
+* `anto` mouth
+* `galad` light
+* `calma` lamp
+* `ered` mountain
+* `fin` hair
+* `Parma` book
+* `taur`forest
+* `elen` stars
+* `aurë` day
+* `aran` king
+* `macil` sword
+
+### Verbs
+* `martir` to eat
+* `hosta` to gather
+* `savin` to exist
+* `síla` to shine
+* `harya` to have
 
 
 ## References
