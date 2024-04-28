@@ -63,9 +63,21 @@ The model that will be used is a grammar which can create and validate the plura
 * `síla` to shine
 * `harya` to have
 
+## Grammar
+To give some context, Geeks For Geeks (2023) mentions that in a compiler Design, there exist several phases. The first is the lexical analysis, which can be implemented using a DFA. But since this is not the focus of the evidence, I will focus on the next phase which is also called the syntax analysis (also known as parsing). What the parsing does, is check if the input follows the grammar that was assigned to the compiler. A lot of different parsers exist, where some use top-down, and others bottom-up. Inside top-down, backtracking and no backtracking parsers exist. The one I will implement is the LL(1), which has no backtracking and no recursive descent, also making it the simplest to implement. 
+
+What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). And after doing this, left recursing also has to be eliminated, which means that the tree can only grow from the left (and not the right). After successfully doing these two steps, we will have an LL(1) parser. 
 
 ## References
+GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
+
+Moreno, M. (December 2, 2004) Elimination of ambiguity. https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node7.html
+
+Moreno, M. (December 2, 2004) Elimination of left recursion https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+
 LOTR Fandom. (n.d.). Elvish word list. https://lotr.fandom.com/wiki/Elvish_word_list
+
+Princeton (n.d.). LL(1) Parser Visualization. https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/
 
 Strack, P. (March 17, 2024). Eldamo - An Elvish Lexicon. https://eldamo.org/index.html
 
