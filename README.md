@@ -14,8 +14,18 @@ The Elven language is complicated, where the nouns can be declined in up to 10 c
 3. Dual
 
 The General plural is the one that all languages have. For example _lasse_ means leaf, and for this plural, it changes to _lassi_ which means leaves. 
-The Partitive plural is one of the main differences. Here the word _lasse_ turns into _lasseli_ which means *some/several/a number of leaves*. 
+The Partitive plural is one of the main differences. Here the word _lasse_ turns into _lasseli_ which means **some/several/a number of leaves**. 
 
-Like Strack (2024) mentions saying _Eldar matir massa_ means *Elves eat bread*. Here you would be implying that all elves eat bread, but this is not the case, so although it is grammatically correct, it is better to say _Eldali matir massa_ which means *Some elves eat bread*. 
+Like Strack (2024) mentions saying _Eldar matir massa_ means **Elves eat bread**. Here you would be implying that all elves eat bread, but this is not the case, so although it is grammatically correct, it is better to say _Eldali matir massa_ which means **Some elves eat bread**. 
 
 The Dual form will not be analyzed in this text, but to give context it refers t exactly to entities of something. An example is _hendu_ which means two eyes. This is not be analyzed since the grammatical rules vary a bit more than the other two plurals. 
+
+## Plural rules
+To better understand how to form the two different types of plural, here the basic rules will be given for each. 
+
+1. General plural.
+     a. When a word ends with a vowel (a, i, o, u, ië) the plural is formed by adding an **r** at the end. For example, _Elda_ turns to _Eldar_.
+     b. When a word ends with a consonant, the plural is formed by adding an **i** at the end of the word. For example _atar_ turns to _atari_.
+     c. When a word ends with e or ë, the plural is formed by adding an **i** at the end, but removing the e in the process. For example _lasse_ turns into _lassi_.
+2. Partitive plural
+    Here the plural is formed by just adding **li** at the end of the word. For example _lasse_ turns into _lasseli_. 
