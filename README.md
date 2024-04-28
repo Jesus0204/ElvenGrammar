@@ -43,3 +43,13 @@ The model that will be used is a grammar which can create and validate the plura
 * `Elda:` Elf
 * `massa:` bread
 
+
+## References
+LOTR Fandom. (n.d.). Elvish word list. https://lotr.fandom.com/wiki/Elvish_word_list
+
+Strack, P. (March 17, 2024). Eldamo - An Elvish Lexicon. https://eldamo.org/index.html
+
+Tolkien Gateway. (n.d). Quenya/Grammar. https://tolkiengateway.net/wiki/Quenya/Grammar
+
+Wikipedia. (January 19, 2024). Quenya. https://en.wikipedia.org/wiki/Quenya
+
