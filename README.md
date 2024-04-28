@@ -24,8 +24,12 @@ The Dual form will not be analyzed in this text, but to give context it refers t
 To better understand how to form the two different types of plural, here the basic rules will be given for each. 
 
 1. General plural.
-   When a word ends with a vowel (a, i, o, u, ië) the plural is formed by adding an **r** at the end. For example, _Elda_ turns to _Eldar_.
+   
+    a. When a word ends with a vowel (a, i, o, u, ië) the plural is formed by adding an **r** at the end. For example, _Elda_ turns to _Eldar_.
+   
     b. When a word ends with a consonant, the plural is formed by adding an **i** at the end of the word. For example _atar_ turns to _atari_.
+   
     c. When a word ends with e or ë, the plural is formed by adding an **i** at the end, but removing the e in the process. For example _lasse_ turns into _lassi_.
-3. Partitive plural:
+   
+2. Partitive Plural:
     Here the plural is formed by just adding **li** at the end of the word. For example _lasse_ turns into _lasseli_. 
