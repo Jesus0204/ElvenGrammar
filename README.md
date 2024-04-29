@@ -44,29 +44,49 @@ The model that will be used is a grammar which can create and validate the plura
 * `alda:` tree
 * `Elda:` Elf
 * `massa:` bread
-* `anto` mouth
-* `galad` light
-* `calma` lamp
-* `ered` mountain
-* `fin` hair
-* `Parma` book
-* `taur`forest
-* `elen` stars
-* `aurë` day
-* `aran` king
-* `macil` sword
+* `anto:` mouth
+* `galad:` light
+* `calma:` lamp
+* `ered:` mountain
+* `fin:` hair
+* `parma:` book
+* `taur:` forest
+* `elen:` stars
+* `aurë:` day
+* `aran:` king
+* `macil:` sword
 
 ### Verbs
-* `martir` to eat
-* `hosta` to gather
-* `savin` to exist
-* `síla` to shine
-* `harya` to have
+* `martir:` to eat
+* `hosta:` to gather
+* `savin:` to exist
+* `síla:` to shine
+* `harya:` to have
 
 ## Grammar
 To give some context, Geeks For Geeks (2023) mentions that in a compiler Design, there exist several phases. The first is the lexical analysis, which can be implemented using a DFA. But since this is not the focus of the evidence, I will focus on the next phase which is also called the syntax analysis (also known as parsing). What the parsing does, is check if the input follows the grammar that was assigned to the compiler. A lot of different parsers exist, where some use top-down, and others bottom-up. Inside top-down, backtracking and no backtracking parsers exist. The one I will implement is the LL(1), which has no backtracking and no recursive descent, also making it the simplest to implement. 
 
-What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). And after doing this, left recursing also has to be eliminated, which means that the tree can only grow from the left (and not the right). After successfully doing these two steps, we will have an LL(1) parser. 
+What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). After doing this, left recursing also has to be eliminated, which means that the tree can only grow from the left (not the right). After successfully doing these two steps, we will have an LL(1) parser. 
+
+## Grammar that recognizes the language
+
+```python
+E -> S , S
+S -> NS VS NS
+NS -> Vo | E | C
+Vo -> VoR VoE
+E -> ER EE
+C -> CR CE
+VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma'
+ER -> 'lass' | 'aur'
+CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil'
+VoE -> 'r' | PP | Empty
+EE -> 'i' | 'e'PP | 'e' | 'ë'
+CE -> 'i' | PP | Empty
+Empty -> 
+PP -> 'li'
+VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
+```
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
