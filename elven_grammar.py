@@ -62,8 +62,9 @@ def separate(sentence):
         'arani': 'aran i', 
         'aranli': 'aran li',
     }
-    for word, replacement in endings.items():
-        sentence = sentence.replace(word, replacement)
+
+    for originalWord, newEnding in endings.items():
+        sentence = sentence.replace(originalWord, newEnding)
     return sentence.split()
 
 sentence = input("Please write the sentence to be generated: ")
