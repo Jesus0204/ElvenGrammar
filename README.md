@@ -148,6 +148,9 @@ First of all, the important thing to mention is that even though a word is _Elda
 ### Type of Grammar
 Now regarding the Chomsky Hierarchy Extended Level, the grammar that I created is a Context-Free Grammar. First of all, this is because all of the left sides are variables and not terminals (thus not making it a Context-Sensitive Grammar or any level higher than that), but the right side has both variables and terminals. It is also important to mention that it is not Regular grammar since Regular Grammar has the right side consisting of a single terminal or a terminal followed by a non-terminal. The grammar that was designed has more than one variable on the right side, thus it is also not on a lower level. Because of these reasons, it is defined as a Context-Free Grammar. 
 
+### Other Methods
+Now as for a different solution, another language could be used such as Javascript and a library called Nearly or TreeGrammar. Yet the Natural Language Toolkit is a very simple way to parse the grammar, so this was the option that was selected for ease of use. 
+
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
 
