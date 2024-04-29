@@ -20,7 +20,7 @@ Like Strack (2024) mentions saying _Eldar matir massa_ means **Elves eat bread**
 
 The Dual form will not be analyzed in this text, but to give context it refers to exactly two entities of something. An example is _hendu_ which means two eyes. This will not be analyzed since the grammatical rules vary a bit more than the other two plurals. 
 
-Another important thing to mention is that Quenya does not have indefinite articles and only has one article which is **i**. This does not change for number, or case.
+Another important thing to mention is that Quenya does not have indefinite articles and only has one article which is **i**. This does not change for number or case.
 
 ### Plural rules
 To better understand how to form the two different types of plural, here the basic rules will be given for each. 
@@ -37,7 +37,7 @@ To better understand how to form the two different types of plural, here the bas
     Here the plural is formed by just adding **li** at the end of the word. For example _lasse_ turns into _lasseli_.
 
 ## Models
-The model that will be used is a grammar which can create and validate the plurals that are created in a sentence. But before generating the grammar, here are thw words with the translations that will be used: 
+The model that will be used is a grammar which can create and validate the plurals that are created in a sentence. But before generating the grammar, here are the words with the translations that will be used: 
 
 ### Nouns
 * `lasse:` leaf
@@ -107,7 +107,7 @@ After checking the grammar, this grammar is ready to be an LL(1) parser since it
 ## Implementation
 Now to test this grammar a simple Python program was made, where the program asks for input (a sentence) and if valid generates the tree. If the grammar does not accept the sentence, then it will give an error, so this is expected. Here are some sentences or tests that can be run on the program: 
 
-### Oraciones correctas
+### Correct Sentences
 1. `Eldar martir massa`: All elves eat bread.
 2. `Eldali martir massa`: Some elves eat bread.
 3. `Aldar harya lassi`: Trees have leaves.
@@ -115,8 +115,16 @@ Now to test this grammar a simple Python program was made, where the program ask
 5. `Aldali harya lasseli`: Some trees have some leaves.
 6. `Eredli harya aldar`: Some mountains have trees.
 7. `Aranli harya macili`: Some kings have swords.
-8. `Elenli síla`: Some stars shine. 
+8. `Elenli síla`: Some stars shine.
+9. `Eldali hosta lassi`: Some elves gather leaves.
+10. `Eldali hosta parmar`: Some elves gather books.
 
+### Incorrect Sentences
+1. `Aldai harya lassi`: Trees have leaves.
+2. `Aldar harya lassli`: Trees have some leaves.
+3. `Eldali martir massai`: Some elves eat bread.
+4. `Eredli harya aldai`: Some mountains have trees.
+5. `Aranli hara macili`: Some kings have swords.
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
