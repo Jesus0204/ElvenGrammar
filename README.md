@@ -71,7 +71,7 @@ What LL parsing does is generate the tree by constructing it from the non-termin
 ## Grammar that recognizes the language
 Here is the grammar of the language, with the verbs and nouns that I chose, and the grammar dictating how the plurals are formed. 
 ```python
-S -> NS VS NS
+S -> NS VS NS | NS VS
 NS -> Vo | E | C
 Vo -> VoR VoE
 E -> ER EE
@@ -80,14 +80,14 @@ VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma'
 ER -> 'lass' | 'aur'
 CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil'
 VoE -> 'r' | PP | Empty
-EE -> 'i' | 'e'PP | 'e' | 'ë'
+EE -> 'i' | 'e' PP | 'e' | 'ë'
 CE -> 'i' | PP | Empty
 Empty -> 
 PP -> 'li'
 VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
 ```
 The explanation of the grammar is the following: 
-1. `S -> NS VS NS:` A sentence has a noun part, a verb, and a noun again.
+1. `S -> NS VS NS | NS VS:` A sentence has a noun part, a verb, and a noun again, or only a noun and a verb.
 2. `NS -> Vo | E | C:` A noun can either end with a vowel that is not e, it can end with e, or end with a consonant.
 3. `Vo -> VoR VoE:` A vowel noun has a vowel root word, and the vowel ending (which includes the singular and the plurals).
 4. `E -> ER EE:` An E noun has an E root word, and the E ending (which includes the singular and the plurals).
@@ -106,6 +106,16 @@ After checking the grammar, this grammar is ready to be an LL(1) parser since it
 
 ## Implementation
 Now to test this grammar a simple Python program was made, where the program asks for input (a sentence) and if valid generates the tree. If the grammar does not accept the sentence, then it will give an error, so this is expected. Here are some sentences or tests that can be run on the program: 
+
+### Oraciones correctas
+1. `Eldar martir massa`: All elves eat bread.
+2. `Eldali martir massa`: Some elves eat bread.
+3. `Aldar harya lassi`: Trees have leaves.
+4. `Aldar harya lasseli`: Trees have some leaves.
+5. `Aldali harya lasseli`: Some trees have some leaves.
+6. `Eredli harya aldar`: Some mountains have trees.
+7. `Aranli harya macili`: Some kings have swords.
+8. `Elenli síla`: Some stars shine. 
 
 
 ## References
