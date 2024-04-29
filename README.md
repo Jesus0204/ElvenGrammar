@@ -141,6 +141,12 @@ Here are some trees of the sentences that are above, which is the output of the 
 <img width="282" alt="Screenshot 2024-04-28 at 21 12 33" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/68797070-de55-4006-8bc0-ce88aa7d0a7f">
 <img width="170" alt="Screenshot 2024-04-28 at 21 13 34" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/ff41b70a-b9b0-4f0f-952e-cf8d4516dcfe">
 
+## Analysis
+### Asymptotic Analysis
+First of all, the important thing to mention is that even though a word is _Eldar_ for example, in the grammar I had to separate it with the root of the word and the ending. Because of this, I have a for loop, that checks the user input and replaces the word that the user put (_Eldar_) to _Elda r_, so the grammar can detect it as correct. This is a process that iterates over each of the words to change it, so it becomes O(n). Additionally, there is another for loop which tokenizes the sentence. But since they are not nested, it still becomes O(n), the best solution possible. 
+
+### Type of Grammar
+Now regarding the Chomsky Hierarchy Extended Level, the grammar that I created is a Context-Free Grammar. First of all, this is because all of the left sides are variables and not terminals (thus not making it a Context-Sensitive Grammar or any level higher than that), but the right side has both variables and terminals. It is also important to mention that it is not Regular grammar since Regular Grammar has the right side consisting of a single terminal or a terminal followed by a non-terminal. The grammar that was designed has more than one variable on the right side, thus it is also not on a lower level. Because of these reasons, it is defined as a Context-Free Grammar. 
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
