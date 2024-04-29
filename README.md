@@ -105,7 +105,7 @@ The explanation of the grammar is the following:
 After checking the grammar, this grammar is ready to be an LL(1) parser since it has no ambiguity. There is no way to get two different trees for the same input. It can't also grow infinitely to the left, so there is no left recursion. Because of this, no extra steps need to be taken to clean the grammar and get it ready to be an LL(1) parser. 
 
 ## Implementation
-Now to test this grammar a simple Python program was made, where the program asks for input (a sentence) and if valid generates the tree. If the sentence is not accepted by the grammar, then it will give an error, so this is expected. Here are some sentences or tests that can be run on the program: 
+Now to test this grammar a simple Python program was made, where the program asks for input (a sentence) and if valid generates the tree. If the grammar does not accept the sentence, then it will give an error, so this is expected. Here are some sentences or tests that can be run on the program: 
 
 
 ## References
