@@ -118,6 +118,7 @@ Now to test this grammar a simple Python program was made, where the program ask
 8. `Elenli síla`: Some stars shine.
 9. `Eldali hosta lassi`: Some elves gather leaves.
 10. `Eldali hosta parmar`: Some elves gather books.
+11. `Calmar síla`: Lamps shine.
 
 ### Incorrect Sentences
 1. `Aldai harya lassi`: Trees have leaves.
@@ -125,6 +126,18 @@ Now to test this grammar a simple Python program was made, where the program ask
 3. `Eldali martir massai`: Some elves eat bread.
 4. `Eredli harya aldai`: Some mountains have trees.
 5. `Aranli hara macili`: Some kings have swords.
+
+### Running the program
+To run the code just type `python elven_grammar.py` and copy and paste one of the above sentences. It is important to mention that other sentences that don't make that much sense will be accepted by the grammar, because the grammar is checking mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
+
+### Correct sentences Trees
+Here are some trees of the sentences that are above, which is the output of the program. 
+
+<img width="551" alt="Screenshot 2024-04-28 at 21 09 00" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/8c73e857-32a9-4d26-ba14-e77ee27c21b7">
+<img width="162" alt="Screenshot 2024-04-28 at 21 10 01" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/608b2537-a0ae-481a-a4e5-30feef59bd16">
+<img width="296" alt="Screenshot 2024-04-28 at 21 10 37" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/9bf99fea-54ac-48c4-b9ec-0e062b73782a">
+<img width="284" alt="Screenshot 2024-04-28 at 21 11 13" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/40d59c7d-9534-40e8-9ec7-03835ecf28a2">
+
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
