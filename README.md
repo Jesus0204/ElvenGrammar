@@ -69,7 +69,7 @@ To give some context, Geeks For Geeks (2023) mentions that in a compiler Design,
 What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). After doing this, left recursing also has to be eliminated, which means that the tree can only grow from the left (not the right). After successfully doing these two steps, we will have an LL(1) parser. 
 
 ## Grammar that recognizes the language
-
+Here is the grammar of the language, with the verbs and nouns that I chose, and the grammar dictating how the plurals are formed. 
 ```python
 E -> S , S
 S -> NS VS NS
@@ -87,6 +87,22 @@ Empty ->
 PP -> 'li'
 VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
 ```
+The explanation of the grammar is the following: 
+1. `E-> S , S:` An expression is a sentence, followed by a comma and another sentence.
+2. `S -> NS VS NS:` A sentence has a noun part, a verb, and a noun again.
+3. `NS -> Vo | E | C:` A noun can either end with a vowel that is not e, it can end with e, or end with a consonant.
+4. `Vo -> VoR VoE:` A vowel noun has a vowel root word, and the vowel ending (which includes the singular and the plurals).
+5. `E -> ER EE:` An E noun has an E root word, and the E ending (which includes the singular and the plurals).
+6. `C -> CR CE:` A consonant noun has a consonant root word, and the consonant ending (which includes the singular and the plurals).
+7. `VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma':` Words which are vowel nouns.
+8. `ER -> 'lass' | 'aur':` Words which are e words. 
+9. `CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil':` Words which are consonant nouns.
+10. `VoE -> 'r' | PP | Empty:` The ending of a vowel noun which is -r for plural, the ending of the Partitive plural, or singular. 
+11. `EE -> 'i' | 'e'PP | 'e' | 'ë':` The ending of an e noun which is -i for plural, the ending of the Partitive plural, or singular (add an e to the end since the singular ends in e). 
+12. `CE -> 'i' | PP | Empty:` The ending of a consonant noun which is -i for plural the ending of the Partitive plural, or singular.
+13. `Empty ->:` If the word is singular then it ends empty without adding anything. 
+14. `PP -> 'li':` The ending of the Partitive plural, which is always -li.
+15. `VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla':` Verbs in Elven language that are used with the nouns. 
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
