@@ -66,7 +66,7 @@ The model that will be used is a grammar which can create and validate the plura
 ## Grammar
 To give some context, Geeks For Geeks (2023) mentions that in a compiler Design, there exist several phases. The first is the lexical analysis, which can be implemented using a DFA. But since this is not the focus of the evidence, I will focus on the next phase which is also called the syntax analysis (also known as parsing). What the parsing does, is check if the input follows the grammar that was assigned to the compiler. A lot of different parsers exist, where some use top-down, and others bottom-up. Inside top-down, backtracking and no backtracking parsers exist. The one I will implement is the LL(1), which has no backtracking and no recursive descent, also making it the simplest to implement. 
 
-What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). After doing this, left recursing also has to be eliminated, which means that the tree can only grow from the left (not the right). After successfully doing these two steps, we will have an LL(1) parser. 
+What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). After doing this, left recursion also has to be eliminated, which means that the tree can only grow from the left (not the right). After successfully doing these two steps, we will have an LL(1) parser. 
 
 ## Grammar that recognizes the language
 Here is the grammar of the language, with the verbs and nouns that I chose, and the grammar dictating how the plurals are formed. 
@@ -105,7 +105,7 @@ The explanation of the grammar is the following:
 After checking the grammar, this grammar is ready to be an LL(1) parser since it has no ambiguity. There is no way to get two different trees for the same input. It can't also grow infinitely to the left, so there is no left recursion. Because of this, no extra steps need to be taken to clean the grammar and get it ready to be an LL(1) parser. 
 
 ## Implementation
-Now to test this grammar a simple Python program was made, where the program asks for input (a sentence) and if valid generates the tree. If the grammar does not accept the sentence, then it will give an error, so this is expected. Here are some sentences or tests that can be run on the program: 
+To test this grammar, a simple Python program was made, where the program asks for input (a sentence) or runs automatized tests and generates the tree if valid. If the grammar does not accept the sentence, it prints that the sentence is not valid. Here are some sentences or tests that can be run on the program: 
 
 ### Correct Sentences
 1. `Eldar martir massa`: All elves eat bread.
@@ -128,10 +128,12 @@ Now to test this grammar a simple Python program was made, where the program ask
 5. `Aranli hara macili`: Some kings have swords.
 
 ### Running the program
-To run the code just type `python elven_grammar.py` and copy and paste one of the above sentences. It is important to mention that other sentences that don't make that much sense will be accepted by the grammar, because the grammar is checking mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
+To run the code just type `python elven_grammar.py`. Two options can be taken. The first is to run the above tests, to compare if the program yields the correct results. The second is to try to write your sentence based on the vocabulary and grammar rules, to see if the plurals used are accurate. 
+
+It is important to mention that the grammar will accept other sentences that don't make that much sense because the grammar is checking mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
 
 ### Correct sentences Trees
-Here are some trees of the sentences that are above, which is the output of the program. 
+Here are some trees of the sentences above, which is the program's output. 
 
 <img width="551" alt="Screenshot 2024-04-28 at 21 09 00" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/8c73e857-32a9-4d26-ba14-e77ee27c21b7">
 <br>
