@@ -86,15 +86,48 @@ sentences = [
     "Calmar síla", 
 ]
 
-for sentence in sentences:
+print("------------")
+print("Welcome to the elven Grammar Tree!")
+print("------------")
+print("In this program you can run automatized tests, or input your own sentence.")
+print("------------")
+print("To run an automatized test please type 1. To input your own sentence type 2.")
+print("------------")
+
+while True:
+        try:
+            decision = int(input("Choose your option: "))
+        except ValueError:
+            print("\nPlease write a number :)")
+            continue
+        if decision <= 0 or decision >= 3:
+            print("\nPlease type 1 o 2.\n")
+            continue
+        else:
+            break
+
+if decision == 1:
+  for sentence in sentences:
+    try:
+      # Separate and parse each sentence using the custom tokenizer
+      separated_sentence = separate(sentence)
+      for tree in elven_parser.parse(separated_sentence):
+        # Since I made the grammar unambiguous only one tree is printed.
+        print("\nThe sentence " + "\033[1m" + sentence + "\033[0m" + " has the following tree: ")
+        tree.pretty_print()
+        print()
+    except:
+      print("The sentence " + "\033[1m" + sentence + "\033[0m" + " is not correct. \n" +
+            "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
+elif decision == 2:
+  sentence = input("Please write the sentence to be generated: ")
   try:
     # Separate and parse each sentence using the custom tokenizer
     separated_sentence = separate(sentence)
     for tree in elven_parser.parse(separated_sentence):
-      # Since I made the grammar unambiguous only one tree is printed.
-      print("The sentence: " + sentence + " has the following tree: ")
+      print("\nThe sentence " + "\033[1m" + sentence + "\033[0m" + " has the following tree: ")
       tree.pretty_print()
       print()
   except:
-    print("The sentence: " + sentence +  " is not correct. \n" +
-          "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
+      print("\nThe sentence " + "\033[1m" + sentence + "\033[0m" + " is not correct. \n" +
+            "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
