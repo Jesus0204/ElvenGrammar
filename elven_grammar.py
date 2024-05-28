@@ -14,7 +14,7 @@ elven_grammar = CFG.fromstring("""
     VoE -> 'r' | PP | Empty
     EE -> 'i' | 'e' PP | 'e' | 'ë'
     CE -> 'i' | PP | Empty
-    Empty -> 
+    Empty ->
     PP -> 'li'
     VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
 """)
@@ -26,40 +26,40 @@ elven_parser = nltk.ChartParser(elven_grammar)
 def separate(sentence):
     sentence = sentence.lower()
 
-    # Since the grammar has the endings separate from the words, 
+    # Since the grammar has the endings separate from the words,
     # they need to be separated so the tree gan be generated correctly
     endings = {
-        'eldar': 'elda r', 
+        'eldar': 'elda r',
         'eldali': 'elda li',
         'lasseli': 'lass e li',
-        'lasse': 'lass e', 
+        'lasse': 'lass e',
         'lassi': 'lass i',
         'aurë': 'aur ë',
         'auri': 'aur i',
         'aureli': 'aur e li',
-        'aldar': 'alda r', 
-        'aldali': 'alda li', 
-        'eredi': 'ered i', 
-        'eredli': 'ered li',  
-        'eleni': 'elen i', 
-        'elenli': 'elen li', 
+        'aldar': 'alda r',
+        'aldali': 'alda li',
+        'eredi': 'ered i',
+        'eredli': 'ered li',
+        'eleni': 'elen i',
+        'elenli': 'elen li',
         'macili': 'macil i',
-        'macilli': 'macil li', 
-        'massar': 'massa r', 
-        'massali': 'massa li', 
-        'antor': 'anto r', 
-        'antoli': 'anto li', 
-        'galadi': 'galad i', 
+        'macilli': 'macil li',
+        'massar': 'massa r',
+        'massali': 'massa li',
+        'antor': 'anto r',
+        'antoli': 'anto li',
+        'galadi': 'galad i',
         'galadli': 'galad li',
-        'calmar': 'calma r', 
+        'calmar': 'calma r',
         'calmali': 'calma li',
-        'fini': 'fin i', 
+        'fini': 'fin i',
         'finli': 'fin li',
-        'parmar': 'parma r', 
+        'parmar': 'parma r',
         'parmali': 'parma li',
-        'tauri': 'taur i', 
+        'tauri': 'taur i',
         'taurli': 'taur li',
-        'arani': 'aran i', 
+        'arani': 'aran i',
         'aranli': 'aran li',
     }
 
@@ -67,9 +67,34 @@ def separate(sentence):
         sentence = sentence.replace(originalWord, newEnding)
     return sentence.split()
 
-sentence = input("Please write the sentence to be generated: ")
+sentences = [
+    "Eldar martir massa",
+    "Eldali martir massa", 
+    "Aldar harya lassli",
+    "Aldar harya lassi", 
+    "Aldar harya lasseli", 
+    "Aldali harya lasseli", 
+    "Aldai harya lassi", 
+    "Eredli harya aldar", 
+    "Eredli harya aldai", 
+    "Eldali martir massai", 
+    "Aranli harya macili", 
+    "Aranli hara macili",
+    "Elenli síla", 
+    "Eldali hosta lassi", 
+    "Eldali hosta parmar", 
+    "Calmar síla", 
+]
 
-# Separate and parse each sentence using the custom tokenizer
-separated_sentence = separate(sentence)
-for tree in elven_parser.parse(separated_sentence):
-  tree.pretty_print()
+for sentence in sentences:
+  try:
+    # Separate and parse each sentence using the custom tokenizer
+    separated_sentence = separate(sentence)
+    for tree in elven_parser.parse(separated_sentence):
+      # Since I made the grammar unambiguous only one tree is printed.
+      print("The sentence: " + sentence + " has the following tree: ")
+      tree.pretty_print()
+      print()
+  except:
+    print("The sentence: " + sentence +  " is not correct. \n" +
+          "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
