@@ -151,16 +151,20 @@ First of all, the important thing to mention is that even though a word is _Elda
 Now regarding the Chomsky Hierarchy Extended Level, the grammar that I created is a Context-Free Grammar. First of all, this is because all of the left sides are variables and not terminals (thus not making it a Context-Sensitive Grammar or any level higher than that), but the right side has both variables and terminals. It is also important to mention that it is not Regular grammar since Regular Grammar has the right side consisting of a single terminal or a terminal followed by a non-terminal. The grammar that was designed has more than one variable on the right side, thus it is also not on a lower level. Because of these reasons, it is defined as a Context-Free Grammar. 
 
 ### Other Methods
-Now as for a different solution, another language could be used such as Javascript and a library called Nearly or TreeGrammar. Yet the Natural Language Toolkit is a very simple way to parse the grammar, so this was the option that was selected for ease of use. 
+Now there are plenty of other ways to implement this small program, such as using other Python libraries for more complex programs or even other languages. After doing some research and asking ChatGTP, I found an excellent very well-documented library called Peggy for Node (Javascript). The official web page states that Peggy was previously known as Peg.js, but it was unmaintained and a community desired forked made Peggy. How Peggy works is that you have a separate file with the grammar. Using the CLI, the grammar file or parser is then compiled into another file. After the file is compiled, it is used in Node, where it can be parsed. Considering the very good documentation and that Javascript could be used to make a web application it is another viable solution. 
+
+Peggy might be an awesome library, but it would take a deeper learning curve than using NLTK, since I don't have to create a web application there is no advantage to doing it in Javascript. The NLTK is a very simple way to create and parse my grammar. Besides, another inconvenience is that the grammar has to be compiled, which takes time, and is another advantage of using Python and NLTK. Using NLTK keeps everything in a single file and covers the needs of the project, where both have the same result, which is why it is the optimal solution. 
 
 ## References
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
+
+LOTR Fandom. (n.d.). Elvish word list. https://lotr.fandom.com/wiki/Elvish_word_list
 
 Moreno, M. (December 2, 2004) Elimination of ambiguity. https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node7.html
 
 Moreno, M. (December 2, 2004) Elimination of left recursion https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
 
-LOTR Fandom. (n.d.). Elvish word list. https://lotr.fandom.com/wiki/Elvish_word_list
+Peggy. (n.d.). Parser Generator for JavaScript. https://peggyjs.org/development/index.html
 
 Princeton (n.d.). LL(1) Parser Visualization. https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/
 
