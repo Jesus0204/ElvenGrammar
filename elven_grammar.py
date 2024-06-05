@@ -3,7 +3,11 @@ from nltk import CFG
 
 # The grammar to create different sentences and plurals is created
 elven_grammar = CFG.fromstring("""
-    S -> NS VS NS | NS VS
+    S -> NSC VS NSC | NSC VS
+    NSC -> NSCP NSC_A
+    NSC_A -> Conj NSCP NSC_A | Empty 
+    NSCP -> NS NSCP_A
+    NSCP_A -> NSCP | Empty
     NS -> Vo | E | C
     Vo -> VoR VoE
     E -> ER EE
@@ -17,6 +21,7 @@ elven_grammar = CFG.fromstring("""
     Empty ->
     PP -> 'li'
     VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
+    Conj -> 'ar' | 'hya'
 """)
 
 # Create a parser with the defined grammar
@@ -69,21 +74,25 @@ def separate(sentence):
 
 sentences = [
     "Eldar martir massa",
-    "Eldali martir massa", 
+    "Eldali martir massa",
     "Aldar harya lassli",
-    "Aldar harya lassi", 
-    "Aldar harya lasseli", 
-    "Aldali harya lasseli", 
-    "Aldai harya lassi", 
-    "Eredli harya aldar", 
-    "Eredli harya aldai", 
-    "Eldali martir massai", 
-    "Aranli harya macili", 
+    "Aldar harya lassi",
+    "Aldar harya lasseli",
+    "Aldali harya lasseli",
+    "Aldai harya lassi",
+    "Eredli harya aldar",
+    "Eredli harya aldai",
+    "Eldali martir massai",
+    "Aranli harya macili",
     "Aranli hara macili",
-    "Elenli síla", 
-    "Eldali hosta lassi", 
-    "Eldali hosta parmar", 
-    "Calmar síla", 
+    "Elenli síla",
+    "Eldali hosta lassi",
+    "Eldali hosta parmar",
+    "Calmar síla",
+    "Aranli harya macili ar calmali",
+    "Aranli harya macili ar calmali ar parmali", 
+    "Eredli harya aldai ar", 
+    "Aranli harya macili ar calmali ar parmali hya eredi"
 ]
 
 print("------------")
@@ -118,7 +127,7 @@ if decision == 1:
         print()
     except:
       print("The sentence " + "\033[1m" + sentence + "\033[0m" + " is not correct. \n" +
-            "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
+            "One or both of the words has an incorrect plural, or the conjunctions were used incorrectly so the tree can't be printed for this sentence. \n")
 elif decision == 2:
   sentence = input("Please write the sentence to be generated: ")
   try:
@@ -130,4 +139,4 @@ elif decision == 2:
       print()
   except:
       print("\nThe sentence " + "\033[1m" + sentence + "\033[0m" + " is not correct. \n" +
-            "One or both of the words has an incorrect plural, so the tree can't be printed for this sentence. \n")
+            "One or both of the words has an incorrect plural, , or the conjunctions were used incorrectly so the tree can't be printed for this sentence. \n")
