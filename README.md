@@ -2,12 +2,12 @@
 Jesús Alejandro Cedillo Zertuche A01705442
 
 ## Description
-The language that I chose is the Elven language (also called Quenya) which according to Wikipedia (2024) "is a constructed language, one of those devised by J. R. R. Tolkien for the Elves in his Middle-earth fiction." Tolkien based the language on Finnish, Latin, and Old English. Tolkien has written several synchronic grammars of Quenya, but only one has been fully published in full, which is called The Early Qenya Grammar. 
+The language that I chose is the Elven language (also called Quenya) which according to Wikipedia (2024) "is a constructed language, one of those devised by J. R. R. Tolkien for the Elves in his Middle-earth fiction." Tolkien based the language on Finnish, Latin, and Old English. Tolkien has written several synchronic grammars of Quenya, but only one has been fully published, called The Early Qenya Grammar. 
 
 The language has existed since the books but recently gained popularity because of the movies that have been released. 
 
 ### Language structure
-The Elven language is complicated, where the nouns can be declined in up to 10 cases. But to reduce the scope of the grammar, what is going to be analyzed is the numbers that nouns use. Most common languages have fairly simple grammar, for example, English, where in most words you just put and s and that's the plural of the word. The difference is that Elven has 3 different types of plurals:
+The Elven language is complicated, where the nouns can be declined in up to 10 cases. However, to reduce the scope of the grammar, the numbers that nouns use are going to be analyzed. Most common languages have fairly simple grammar, for example, English, where in most words you just put and s and that's the plural of the word. The difference is that Elven has 3 different types of plurals:
 
 1. General plural
 2. Partitive Plural
@@ -211,14 +211,16 @@ Here are some trees of the sentences above, which is the program's output.
 First of all, the important thing to mention is that even though a word is _Eldar_ for example, in the grammar I had to separate it with the root of the word and the ending. Because of this, I have a for loop, that checks the user input and replaces the word that the user put (_Eldar_) to _Elda r_, so the grammar can detect it as correct. This is a process that iterates over each of the words to change it, so it becomes O(n). Additionally, I have a for loop that iterates over each sentence (when running the automatized tests) and a nested loop that prints each tree. Yet, since this is an LL(1) parser and there is no ambiguity, only one tree can be generated with the grammar, so this loop is O(1). The other two loops are not nested, so it remains O(n), the best solution possible.  
 
 ### Type of Grammar
-Now regarding the Chomsky Hierarchy Extended Level, the grammar that I created is a Context-Free Grammar. First of all, this is because all of the left sides are variables and not terminals (thus not making it a Context-Sensitive Grammar or any level higher than that), but the right side has both variables and terminals. It is also important to mention that it is not Regular grammar since Regular Grammar has the right side consisting of a single terminal or a terminal followed by a non-terminal. The grammar that was designed has more than one variable on the right side, thus it is also not on a lower level. Because of these reasons, it is defined as a Context-Free Grammar. 
+Now regarding the Chomsky Hierarchy Extended Level, the grammar that I created is a Context-Free Grammar. First of all, this is because all of the left sides are variables and not terminals (thus not making it a Context-Sensitive Grammar or any level higher than that), but the right side has both variables and terminals. Now, Geeks For Geeks (2022) defines regular grammar as the following: "They have a single non-terminal on the left-hand side and a right-hand side consisting of a single terminal or single terminal followed by a non-terminal.". The order of the right side can either make it a Left Linear grammar or a Right Linear Grammar. Yet the grammar that I designed has more than one Terminal or non-terminal on the right side, thus it can't be classified as Regular Grammar. Because of these reasons, it is defined as a Context-Free Grammar, or a type 2 language. 
 
 ### Other Methods
 Now there are plenty of other ways to implement this small program, such as using other Python libraries for more complex programs or even other languages. After doing some research and asking ChatGTP for suggestions, I found an excellent very well-documented library called Peggy for Node (Javascript). The official web page states that Peggy was previously known as Peg.js, but it was unmaintained and a community desired forked made Peggy. How Peggy works is that you have a separate file with the grammar. Using the CLI, the grammar file or parser is then compiled into another file. After the file is compiled, it is used in Node, where it can be parsed. Considering the very good documentation and that Javascript could be used to make a web application it is another viable solution. 
 
-Peggy might be an awesome library, but it would take a deeper learning curve than using NLTK, since I don't have to create a web application there is no advantage to doing it in Javascript. The NLTK is a very simple way to create and parse my grammar. Besides, another inconvenience is that the grammar has to be compiled, which takes time, and is another advantage of using Python and NLTK. Using NLTK keeps everything in a single file and covers the needs of the project, where both have the same result, which is why it is the optimal solution. 
+Peggy might be an awesome library, but it would take a deeper learning curve than using NLTK, since I don't have to create a web application there is no advantage to doing it in Javascript. The NLTK is a straightforward way to create and parse my grammar. Besides, another inconvenience is that the grammar has to be compiled, which takes time, and is another advantage of using Python and NLTK. Using NLTK keeps everything in a single file and covers the needs of the project, where both have the same result, which is why it is the optimal solution. 
 
 ## References
+GeeksForGeeks. (22 April, 2022). Regular grammar (Model regular grammar). https://www.geeksforgeeks.org/regular-grammar-model-regular-grammars/
+
 GeeksForGeeks (19 April, 2023). Introduction to Syntax Analysis in Compiler Design https://www.geeksforgeeks.org/introduction-to-syntax-analysis-in-compiler-design/.
 
 LOTR Fandom. (n.d.). Elvish word list. https://lotr.fandom.com/wiki/Elvish_word_list
