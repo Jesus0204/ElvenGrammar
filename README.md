@@ -186,12 +186,14 @@ To test this grammar, a simple Python program was made, where the program asks f
 3. `Eldali martir massai`: Some elves eat bread.
 4. `Eredli harya aldai`: Some mountains have trees.
 5. `Aranli hara macili`: Some kings have swords.
-6. `Eredli harya aldai ar`: Some mountains hace trees and...
+6. `Eredli harya aldai ar`: Some mountains have trees and...
 
 ### Running the program
 To run the code just type `python elven_grammar.py`. Two options can be taken. The first is to run the above tests, to compare if the program yields the correct results. The second is to try to write your sentence based on the vocabulary and grammar rules, to see if the plurals used are accurate. 
 
 It is important to mention that the grammar will accept other sentences that don't make that much sense because the grammar checks mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
+
+To run it, you can either use the file or run the file on your computer, considering you have Python and NLTK installed. If you don't I recommend copying the code into Google Collab, where by copying you can run the code without installing anything. 
 
 ### Correct sentences Trees
 Here are some trees of the sentences above, which is the program's output. 
