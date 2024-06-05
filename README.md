@@ -63,15 +63,19 @@ The model that will be used is a grammar which can create and validate the plura
 * `síla:` to shine
 * `harya:` to have
 
+### Conjunctions
+* `ar`: and
+* `hya`: or 
+
 ## Grammar
-To give some context, Geeks For Geeks (2023) mentions that in a compiler Design, there exist several phases. The first is the lexical analysis, which can be implemented using a DFA. But since this is not the focus of the evidence, I will focus on the next phase which is also called the syntax analysis (also known as parsing). What the parsing does, is check if the input follows the grammar that was assigned to the compiler. A lot of different parsers exist, where some use top-down, and others bottom-up. Inside top-down, backtracking and no backtracking parsers exist. The one I will implement is the LL(1), which has no backtracking and no recursive descent, also making it the simplest to implement. 
+To give some context, Geeks For Geeks (2023) mentions that several phases exist in compiler design. The first is the lexical analysis, which can be implemented using a DFA. But since this is not the focus of the evidence, I will focus on the next phase which is also called the syntax analysis (also known as parsing). What the parsing does, is check if the input follows the grammar that was assigned to the compiler. A lot of different parsers exist, where some use top-down, and others bottom-up. Inside top-down, backtracking and no backtracking parsers exist. The one I will implement is the LL(1), which has no backtracking and no recursive descent, also making it the simplest to implement. 
 
 What LL parsing does is generate the tree by constructing it from the non-terminals. According to Moreno (2004), to get to an LL(1) parser several steps need to be taken. From an existing grammar, the first thing that needs to be done is to eliminate the ambiguity (meaning that two different trees can't exist for the same input). After doing this, left recursion also has to be eliminated, which means that the tree can only grow from the left (not the right). After successfully doing these two steps, we will have an LL(1) parser. 
 
-## Grammar that recognizes the language
-Here is the grammar of the language, with the verbs and nouns that I chose, and the grammar dictating how the plurals are formed. 
+### Initial Grammar 
 ```python
-S -> NS VS NS | NS VS
+S -> NSC VS NSC | NSC VS 
+NSC -> NSC Conj NSC | NS
 NS -> Vo | E | C
 Vo -> VoR VoE
 E -> ER EE
@@ -82,27 +86,80 @@ CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil'
 VoE -> 'r' | PP | Empty
 EE -> 'i' | 'e' PP | 'e' | 'ë'
 CE -> 'i' | PP | Empty
-Empty -> 
+Empty ->
 PP -> 'li'
 VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
+Conj -> 'ar' | 'hya'
+```
+
+This is the first proposal of the grammar. But first, we need to analyze to see if it qualifies as an LL(1) parser. Here NSC means Noun Sentence Conjunction Phrase, and sentences with or without conjunctions can exist. When the sentence does not have conjunctions and uses `NS` there is no ambiguity. The problem is when it uses more than one conjunction. One conjunction only generates one tree, but when a combination of conjunctions is used there is more than one possible tree. For example in the sentence `Aranli harya macili ar calmali ar parmali` two conjunctions are used. The sentence means: `Some kings have some swords and, some lamps and some books.` The sentence generates the following trees: 
+
+<img width="625" alt="Screenshot 2024-06-04 at 17 32 10" src="https://github.com/Jesus0204/ElvenGrammar/assets/65917649/0a96df8f-da7d-4db0-a691-75b4eaee6847">
+
+### Eliminate Ambiguity
+This occurs because, between the conjunctions, NSC (or itself) is called and yields several results. So the first thing that has to be done is to eliminate such ambiguity. This is done by adding an intermediate non-terminal. The new non-terminal will be named NSCP: 
+```python
+NSC -> NSC Conj NSCP | NSCP
+NSCP -> NSCP | NS
+```
+What changed is that instead of having two NSCs, now there is only one NSC, and ends with an NSCP or a single NSCP. By doing this and establishing NSCP as itself or NS, the sentences that don't have conjunctions can still be formed, while still being able to form a sentence with multiple conjunctions. 
+
+### Eliminate Left Recursion
+Even though ambiguity has been eliminated, another problem remains. The parser can now generate trees that grow both left and right, and for it to qualify for an LL(1) parser, left recursion has to be eliminated. Left recursion is eliminated by following the next two steps: 
+1. Flip the new state and put the original state prime.
+2. The prime state is equal to what was originally, or empty.
+
+The part of the grammar (NSC and NSCP which both can lead to left recursion) is modified as follows: 
+```python
+NSC -> NSCP NSC'
+NSC' -> Conj NSCP NSC' | Empty
+NSCP -> NS NSCP'
+NSCP' -> NSCP | Empty
+```
+
+## Grammar that recognizes the language
+Here is the grammar of the language, with the verbs and nouns that I chose, and the grammar dictating how the plurals are formed (*Note: The apostrophe `'` was changed to `_A` so it could run on the Python program: 
+```python
+S -> NSC VS NSC | NSC VS 
+NSC -> NSCP NSC_A
+NSC_A -> Conj NSCP NSC_A | Empty 
+NSCP -> NS NSCP_A
+NSCP_A -> NSCP | Empty
+NS -> Vo | E | C
+Vo -> VoR VoE
+E -> ER EE
+C -> CR CE
+VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma'
+ER -> 'lass' | 'aur'
+CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil'
+VoE -> 'r' | PP | Empty
+EE -> 'i' | 'e' PP | 'e' | 'ë'
+CE -> 'i' | PP | Empty
+Empty ->
+PP -> 'li'
+VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla'
+Conj -> 'ar' | 'hya'
 ```
 The explanation of the grammar is the following: 
-1. `S -> NS VS NS | NS VS:` A sentence has a noun part, a verb, and a noun again, or only a noun and a verb.
-2. `NS -> Vo | E | C:` A noun can either end with a vowel that is not e, it can end with e, or end with a consonant.
-3. `Vo -> VoR VoE:` A vowel noun has a vowel root word, and the vowel ending (which includes the singular and the plurals).
-4. `E -> ER EE:` An E noun has an E root word, and the E ending (which includes the singular and the plurals).
-5. `C -> CR CE:` A consonant noun has a consonant root word, and the consonant ending (which includes the singular and the plurals).
-6. `VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma':` Words which are vowel nouns.
-7. `ER -> 'lass' | 'aur':` Words which are e words. 
-8. `CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil':` Words which are consonant nouns.
-9. `VoE -> 'r' | PP | Empty:` The ending of a vowel noun which is -r for plural, the ending of the Partitive plural, or singular. 
-10. `EE -> 'i' | 'e'PP | 'e' | 'ë':` The ending of an e noun which is -i for plural, the ending of the Partitive plural, or singular (add an e to the end since the singular ends in e). 
-11. `CE -> 'i' | PP | Empty:` The ending of a consonant noun which is -i for plural the ending of the Partitive plural, or singular.
-12. `Empty ->:` If the word is singular then it ends empty without adding anything. 
-13. `PP -> 'li':` The ending of the Partitive plural, which is always -li.
-14. `VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla':` Verbs in Elven language that are used with the nouns.
-
-After checking the grammar, this grammar is ready to be an LL(1) parser since it has no ambiguity. There is no way to get two different trees for the same input. It can't also grow infinitely to the left, so there is no left recursion. Because of this, no extra steps need to be taken to clean the grammar and get it ready to be an LL(1) parser. 
+1. `S -> NSC VS NSC | NSC VS:` A sentence has a noun part, a verb, and a noun again, or only a noun and a verb.
+2. `NSC -> NSCP NSC_A`: The noun part consists of a noun sequence followed by the prime of the noun part. This is done like this to avoid left recursion. It can be seen as the continuation of the noun part. 
+3. `NSC_A -> Conj NSCP NSC_A | Empty `: The prime of the noun part, which can include a conjunction along with a noun phrase, or just be empty. 
+4. `NSCP -> NS NSCP_A`: The noun phrase of the sentence which includes a noun and the prime of the noun phrase to avoid left recursion.
+5. `NSCP_A -> NSCP | Empty`: The prime of the noun phrase of the sentence which can be empty, or include another noun phrase.
+6. `NS -> Vo | E | C:` A noun can either end with a vowel that is not e, it can end with e, or end with a consonant.
+7. `Vo -> VoR VoE:` A vowel noun has a vowel root word, and the vowel ending (which includes the singular and the plurals).
+8. `E -> ER EE:` An E noun has an E root word, and the E ending (which includes the singular and the plurals).
+9. `C -> CR CE:` A consonant noun has a consonant root word, and the consonant ending (which includes the singular and the plurals).
+10. `VoR -> 'elda' | 'massa' | 'alda' | 'parma' | 'calma':` Words which are vowel nouns.
+11. `ER -> 'lass' | 'aur':` Words which are e words. 
+12. `CR -> 'atar' | 'galad' | 'ered' | 'fin' | 'taur' | 'elen' | 'aran' | 'macil':` Words which are consonant nouns.
+13. `VoE -> 'r' | PP | Empty:` The ending of a vowel noun which is -r for plural, the ending of the Partitive plural, or singular. 
+14. `EE -> 'i' | 'e'PP | 'e' | 'ë':` The ending of an e noun which is -i for plural, the ending of the Partitive plural, or singular (add an e to the end since the singular ends in e). 
+15. `CE -> 'i' | PP | Empty:` The ending of a consonant noun which is -i for plural the ending of the Partitive plural, or singular.
+16. `Empty ->:` If the word is singular then it ends empty without adding anything. 
+17. `PP -> 'li':` The ending of the Partitive plural, which is always -li.
+18. `VS -> 'martir' | 'harya' | 'hosta' | 'savin' | 'síla':` Verbs in Elven language that are used with the nouns.
+19. `Conj -> 'ar' | 'hya'`: Simple Conjunctions in Quenya, which make sense with the given words. 
 
 ## Implementation
 To test this grammar, a simple Python program was made, where the program asks for input (a sentence) or runs automatized tests and generates the tree if valid. If the grammar does not accept the sentence, it prints that the sentence is not valid. Here are some sentences or tests that can be run on the program: 
@@ -119,6 +176,9 @@ To test this grammar, a simple Python program was made, where the program asks f
 9. `Eldali hosta lassi`: Some elves gather leaves.
 10. `Eldali hosta parmar`: Some elves gather books.
 11. `Calmar síla`: Lamps shine.
+12. `Aranli harya macili ar calmali`: Some kings have some swords and, some lamps.
+13. `Aranli harya macili ar calmali ar parmali`: Some kings have some swords and, some lamps and some books.
+14. `Aranli harya macili ar calmali ar parmali hya eredi`: Some kings have some swords and, some lamps and some books or mountains. 
 
 ### Incorrect Sentences
 1. `Aldai harya lassi`: Trees have leaves.
@@ -126,11 +186,12 @@ To test this grammar, a simple Python program was made, where the program asks f
 3. `Eldali martir massai`: Some elves eat bread.
 4. `Eredli harya aldai`: Some mountains have trees.
 5. `Aranli hara macili`: Some kings have swords.
+6. `Eredli harya aldai ar`: Some mountains hace trees and...
 
 ### Running the program
 To run the code just type `python elven_grammar.py`. Two options can be taken. The first is to run the above tests, to compare if the program yields the correct results. The second is to try to write your sentence based on the vocabulary and grammar rules, to see if the plurals used are accurate. 
 
-It is important to mention that the grammar will accept other sentences that don't make that much sense because the grammar is checking mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
+It is important to mention that the grammar will accept other sentences that don't make that much sense because the grammar checks mostly the plurals, not the verb conjugation or if the sentence makes sense. So more sentences can be created, and the tree will be generated if the plurals are correct. You are welcome to test these words, as they should work too. 
 
 ### Correct sentences Trees
 Here are some trees of the sentences above, which is the program's output. 
